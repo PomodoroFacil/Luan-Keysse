@@ -25,7 +25,7 @@ position:relative;
 background:linear-gradient(135deg,#ff4e8a,#ff8fb1);
 }
 
-/* IMAGEM DE FUNDO */
+/* IMAGEM DE FUNDO AJUSTADA */
 body::before{
 content:"";
 position:absolute;
@@ -33,9 +33,10 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:url("fundo.png") center center / cover no-repeat;
-opacity:0.18;
-filter:blur(2px);
+background:url("fundo.png") center center no-repeat;
+background-size:85%; 
+opacity:0.22;
+filter:blur(1.5px);
 z-index:0;
 }
 
