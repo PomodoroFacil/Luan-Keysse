@@ -4,12 +4,14 @@
 <meta charset="UTF-8">
 <title>Luan & Keysse ❤️</title>
 
+<!-- FONTES ROMÂNTICAS -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
 }
 
 body{
@@ -20,6 +22,7 @@ justify-content:center;
 align-items:center;
 background:linear-gradient(135deg,#ff4e8a,#ff8fb1);
 color:white;
+font-family:'Playfair Display', serif;
 }
 
 /* LOGIN */
@@ -64,8 +67,11 @@ z-index:5;
 }
 
 h1{
-font-size:3rem;
+font-family:'Great Vibes', cursive;
+font-size:4rem;
 margin-bottom:20px;
+letter-spacing:2px;
+text-shadow:0 5px 20px rgba(0,0,0,0.3);
 }
 
 .contador{
@@ -86,11 +92,13 @@ font-weight:bold;
 .frase{
 position:absolute;
 top:15%;
-font-size:1.5rem;
+font-family:'Great Vibes', cursive;
+font-size:2rem;
 opacity:0;
 animation:fadeFrase 8s ease-in-out;
 text-align:center;
 max-width:80%;
+text-shadow:0 3px 15px rgba(0,0,0,0.4);
 }
 
 @keyframes fadeFrase{
@@ -149,6 +157,22 @@ animation:twinkle 4s infinite;
 100%{transform:translateY(-120vh);opacity:0;}
 }
 
+/* SURPRESA */
+#surpresa{
+display:none;
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#ff1e56,#ffac41);
+justify-content:center;
+align-items:center;
+text-align:center;
+flex-direction:column;
+z-index:30;
+font-family:'Great Vibes', cursive;
+font-size:3rem;
+color:white;
+}
 </style>
 </head>
 
@@ -169,12 +193,24 @@ Estamos juntos há:
 </div>
 </div>
 
+<div id="surpresa">
+💖 Feliz Nosso Dia 💖
+<p style="font-size:1.5rem;margin-top:20px;">Desde 18/06/2018 escrevendo nossa história.</p>
+</div>
+
 <audio id="musica" loop preload="auto">
 <source src="imaturo.mp3" type="audio/mp3">
 </audio>
 
 <script>
 
+/* SURPRESA AUTOMÁTICA */
+const hoje=new Date();
+if(hoje.getMonth()===5 && hoje.getDate()===18){
+document.getElementById("surpresa").style.display="flex";
+}
+
+/* LOGIN */
 function verificarSenha(){
 if(document.getElementById("senha").value==="18062018"){
 document.getElementById("login").style.display="none";
@@ -208,6 +244,25 @@ document.getElementById("tempo").innerHTML=
 setInterval(atualizarTempo,1000);
 atualizarTempo();
 
+/* FRASES PERSONALIZADAS */
+const frases=[
+"Desde 18 de junho de 2018 minha vida tem mais cor.",
+"Você é meu melhor capítulo.",
+"Nosso amor é minha certeza.",
+"A gente cresceu… mas o amor cresceu mais.",
+"Se eu tivesse que escolher de novo, escolheria você."
+];
+
+function iniciarFrases(){
+setInterval(()=>{
+const frase=document.createElement("div");
+frase.className="frase";
+frase.innerText=frases[Math.floor(Math.random()*frases.length)];
+document.body.appendChild(frase);
+setTimeout(()=>frase.remove(),8000);
+},10000);
+}
+
 /* CORAÇÕES */
 function iniciarCoracoes(){
 setInterval(()=>{
@@ -235,25 +290,6 @@ setTimeout(()=>div.remove(),20000);
 },3000);
 }
 
-/* FRASES */
-const frases=[
-"Desde 18 de junho de 2018 minha vida tem mais cor.",
-"Cada dia ao seu lado vale mais que mil promessas.",
-"Nosso amor não é tempo… é eternidade.",
-"Se eu tivesse que escolher de novo, escolheria você.",
-"A melhor parte da minha história começa com você."
-];
-
-function iniciarFrases(){
-setInterval(()=>{
-const frase=document.createElement("div");
-frase.className="frase";
-frase.innerText=frases[Math.floor(Math.random()*frases.length)];
-document.body.appendChild(frase);
-setTimeout(()=>frase.remove(),8000);
-},10000);
-}
-
 /* BRILHO */
 function iniciarBrilho(){
 setInterval(()=>{
@@ -264,12 +300,6 @@ s.style.top=Math.random()*100+"vh";
 document.body.appendChild(s);
 setTimeout(()=>s.remove(),4000);
 },300);
-}
-
-/* MODO SURPRESA */
-const hoje=new Date();
-if(hoje.getMonth()===5 && hoje.getDate()===18){
-alert("Hoje é nosso dia ❤️");
 }
 
 </script>
