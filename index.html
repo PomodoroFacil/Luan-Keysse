@@ -18,7 +18,7 @@ overflow:hidden;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#ff758c,#ff7eb3);
+background:linear-gradient(135deg,#ff4e8a,#ff8fb1);
 color:white;
 }
 
@@ -31,7 +31,7 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#ff758c,#ff7eb3);
+background:linear-gradient(135deg,#ff4e8a,#ff8fb1);
 z-index:10;
 }
 
@@ -50,7 +50,7 @@ border:none;
 border-radius:8px;
 cursor:pointer;
 background:white;
-color:#ff4e80;
+color:#ff4e8a;
 font-weight:bold;
 }
 
@@ -91,7 +91,7 @@ bottom:-50px;
 color:white;
 font-size:24px;
 animation:float 8s linear infinite;
-opacity:0.7;
+opacity:0.8;
 }
 
 @keyframes float{
@@ -132,16 +132,16 @@ Estamos juntos há:
 </div>
 </div>
 
-<!-- MÚSICA -->
+<!-- MÚSICA PERSONALIZADA -->
 <audio id="musica" loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+<source src="imaturo.mp3" type="audio/mp3">
 </audio>
 
 <script>
 
 // ====== SENHA ======
 function verificarSenha(){
-const senhaCorreta = "18062018"; // ALTERA AQUI SE QUISER
+const senhaCorreta = "18062018";
 const senhaDigitada = document.getElementById("senha").value;
 
 if(senhaDigitada === senhaCorreta){
@@ -193,7 +193,7 @@ setTimeout(()=>{
 heart.remove();
 },8000);
 
-},500);
+},400);
 }
 
 </script>
