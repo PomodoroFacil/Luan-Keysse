@@ -84,26 +84,38 @@ font-size:2rem;
 font-weight:bold;
 }
 
-/* FOTO CORAÇÃO */
-.fotoHeart{
+/* CORAÇÕES */
+.heart{
 position:absolute;
-bottom:-250px;
-width:240px;
-height:240px;
+bottom:-100px;
+font-size:30px;
+color:#ff0033;
+animation:floatUp linear forwards;
+opacity:0.8;
+}
+
+/* FOTOS */
+.foto{
+position:absolute;
+bottom:-200px;
+width:180px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
 animation:floatUp linear forwards;
 opacity:0;
 }
 
+/* ANIMAÇÃO */
 @keyframes floatUp{
 0%{
-transform:translateY(0) scale(0.8);
+transform:translateY(0);
 opacity:0;
 }
 10%{
 opacity:1;
 }
 100%{
-transform:translateY(-120vh) scale(1.1);
+transform:translateY(-120vh);
 opacity:0;
 }
 }
@@ -158,9 +170,10 @@ document.getElementById("login").style.display="none";
 document.getElementById("site").style.display="flex";
 
 const musica = document.getElementById("musica");
-musica.volume = 0.35; // volume reduzido
+musica.volume = 0.35;
 musica.play().catch(e => console.log("Autoplay bloqueado"));
 
+iniciarCoracoes();
 iniciarFotos();
 }else{
 document.getElementById("erro").innerText="Senha incorreta 😢";
@@ -191,6 +204,23 @@ ${horas}h ${minutos}m ${segundos}s`;
 setInterval(atualizarTempo,1000);
 atualizarTempo();
 
+// ===== CORAÇÕES =====
+function iniciarCoracoes(){
+setInterval(()=>{
+const heart = document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(6 + Math.random()*4)+"s";
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},10000);
+
+},800);
+}
+
 // ===== FOTOS =====
 const fotos = [
 "foto1.png","foto2.png","foto3.png","foto4.png",
@@ -199,39 +229,19 @@ const fotos = [
 ];
 
 function iniciarFotos(){
-
 setInterval(()=>{
-
-const container = document.createElement("div");
-container.classList.add("fotoHeart");
-container.style.left = Math.random()*85 + "vw";
-container.style.animationDuration = (14 + Math.random()*6) + "s";
-
-container.innerHTML = `
-<svg viewBox="0 0 512 512" width="100%" height="100%">
-<defs>
-<clipPath id="heartClip">
-<path d="M471.701 73.698c-54.5-46.4-136-38.3-186.4 13.7L256 116.9l-29.3-29.5c-50.4-52-131.9-60.1-186.4-13.7-62.8 53.5-66.1 149.8-9.9 207.2l193.5 199.8c12 12.4 31.4 12.4 43.4 0l193.5-199.8c56.2-57.4 52.9-153.7-9.9-207.2z"/>
-</clipPath>
-</defs>
-
-<image 
-href="${fotos[Math.floor(Math.random()*fotos.length)]}"
-width="100%" 
-height="100%"
-clip-path="url(#heartClip)"
-preserveAspectRatio="xMidYMid slice"/>
-</svg>
-`;
-
-document.body.appendChild(container);
+const img = document.createElement("img");
+img.classList.add("foto");
+img.src = fotos[Math.floor(Math.random()*fotos.length)];
+img.style.left = Math.random()*85 + "vw";
+img.style.animationDuration = (12 + Math.random()*6) + "s";
+document.body.appendChild(img);
 
 setTimeout(()=>{
-container.remove();
+img.remove();
 },20000);
 
-},2200);
-
+},2500);
 }
 
 </script>
