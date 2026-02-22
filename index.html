@@ -1,108 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>LakeCase ❤️</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+<meta charset="UTF-8">
+<title>Luan & Keysse ❤️</title>
 
-    body {
-      height: 100vh;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-align: center;
-      overflow: hidden;
-    }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-    h1 {
-      position: absolute;
-      top: 40px;
-      font-size: 2.5rem;
-      letter-spacing: 2px;
-    }
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    color:white;
 
-    .contador {
-      font-size: 2rem;
-      margin-top: 20px;
-      line-height: 1.8;
-      background: rgba(255,255,255,0.1);
-      padding: 30px;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-    }
+    /* FUNDO ROMÂNTICO */
+    background-image: url('https://images.unsplash.com/photo-1516589091380-5d8e87df6999');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 
-    .tempo {
-      font-size: 2.8rem;
-      font-weight: bold;
-      margin-top: 15px;
-    }
+.overlay{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.55);
+    z-index:0;
+}
 
-    /* FOTOS AO REDOR */
-    .foto {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid white;
-      box-shadow: 0 0 20px rgba(255,255,255,0.3);
-    }
+h1{
+    font-size:3rem;
+    margin-bottom:30px;
+    z-index:1;
+    letter-spacing:2px;
+}
 
-    .foto1 { top: 10%; left: 10%; }
-    .foto2 { top: 15%; right: 10%; }
-    .foto3 { bottom: 10%; left: 15%; }
-    .foto4 { bottom: 12%; right: 12%; }
+.contador{
+    background:rgba(255,255,255,0.15);
+    padding:40px;
+    border-radius:25px;
+    backdrop-filter:blur(15px);
+    z-index:1;
+    font-size:1.5rem;
+}
 
-  </style>
+.tempo{
+    margin-top:15px;
+    font-size:2rem;
+    font-weight:bold;
+}
+
+</style>
 </head>
+
 <body>
 
-  <h1>LakeCase ❤️</h1>
+<div class="overlay"></div>
 
-  <div class="contador">
-    Estamos juntos há:
-    <div class="tempo" id="tempo"></div>
-  </div>
+<h1>Luan & Keysse ❤️</h1>
 
-  <!-- Fotos (depois você troca os links pelas suas fotos) -->
-  <img src="https://via.placeholder.com/150" class="foto foto1">
-  <img src="https://via.placeholder.com/150" class="foto foto2">
-  <img src="https://via.placeholder.com/150" class="foto foto3">
-  <img src="https://via.placeholder.com/150" class="foto foto4">
+<div class="contador">
+Estamos juntos há:
+<div class="tempo" id="tempo"></div>
+</div>
 
-  <script>
-    const dataInicio = new Date("2018-06-18T00:00:00");
+<script>
 
-    function atualizarTempo() {
-      const agora = new Date();
-      const diferenca = agora - dataInicio;
+const dataInicio = new Date("2018-06-18T00:00:00");
 
-      const segundosTotais = Math.floor(diferenca / 1000);
+function atualizarTempo() {
 
-      const anos = Math.floor(segundosTotais / (365.25 * 24 * 60 * 60));
-      const meses = Math.floor((segundosTotais % (365.25 * 24 * 60 * 60)) / (30.44 * 24 * 60 * 60));
-      const dias = Math.floor((segundosTotais % (30.44 * 24 * 60 * 60)) / (24 * 60 * 60));
-      const horas = Math.floor((segundosTotais % (24 * 60 * 60)) / (60 * 60));
-      const minutos = Math.floor((segundosTotais % (60 * 60)) / 60);
-      const segundos = segundosTotais % 60;
+    const agora = new Date();
+    const diferenca = agora - dataInicio;
 
-      document.getElementById("tempo").innerHTML =
+    const segundosTotais = Math.floor(diferenca / 1000);
+
+    const anos = Math.floor(segundosTotais / (365.25 * 24 * 60 * 60));
+    const meses = Math.floor((segundosTotais % (365.25 * 24 * 60 * 60)) / (30.44 * 24 * 60 * 60));
+    const dias = Math.floor((segundosTotais % (30.44 * 24 * 60 * 60)) / (24 * 60 * 60));
+    const horas = Math.floor((segundosTotais % (24 * 60 * 60)) / (60 * 60));
+    const minutos = Math.floor((segundosTotais % (60 * 60)) / 60);
+    const segundos = segundosTotais % 60;
+
+    document.getElementById("tempo").innerHTML =
         `${anos} anos, ${meses} meses, ${dias} dias<br>
          ${horas}h ${minutos}m ${segundos}s`;
-    }
+}
 
-    setInterval(atualizarTempo, 1000);
-    atualizarTempo();
-  </script>
+setInterval(atualizarTempo, 1000);
+atualizarTempo();
+
+</script>
 
 </body>
 </html>
