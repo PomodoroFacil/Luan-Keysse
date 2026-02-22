@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Luan & Keysse ❤️</title>
 
-<!-- FONTES ROMÂNTICAS -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
@@ -20,9 +19,24 @@ overflow:hidden;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#ff4e8a,#ff8fb1);
 color:white;
 font-family:'Playfair Display', serif;
+position:relative;
+background:linear-gradient(135deg,#ff4e8a,#ff8fb1);
+}
+
+/* IMAGEM DE FUNDO */
+body::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:url("fundo.png") center center / cover no-repeat;
+opacity:0.18;
+filter:blur(2px);
+z-index:0;
 }
 
 /* LOGIN */
@@ -64,6 +78,7 @@ flex-direction:column;
 align-items:center;
 text-align:center;
 z-index:5;
+position:relative;
 }
 
 h1{
@@ -76,10 +91,11 @@ text-shadow:0 5px 20px rgba(0,0,0,0.3);
 
 .contador{
 font-size:1.8rem;
-background:rgba(255,255,255,0.2);
+background:rgba(255,255,255,0.25);
 padding:40px;
 border-radius:20px;
 backdrop-filter:blur(10px);
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
 }
 
 .tempo{
@@ -135,7 +151,7 @@ width:100%;
 border-radius:8px;
 }
 
-/* BRILHOS */
+/* BRILHO */
 .sparkle{
 position:absolute;
 width:5px;
@@ -155,23 +171,6 @@ animation:twinkle 4s infinite;
 0%{transform:translateY(0);opacity:0;}
 10%{opacity:1;}
 100%{transform:translateY(-120vh);opacity:0;}
-}
-
-/* SURPRESA */
-#surpresa{
-display:none;
-position:absolute;
-width:100%;
-height:100%;
-background:linear-gradient(135deg,#ff1e56,#ffac41);
-justify-content:center;
-align-items:center;
-text-align:center;
-flex-direction:column;
-z-index:30;
-font-family:'Great Vibes', cursive;
-font-size:3rem;
-color:white;
 }
 </style>
 </head>
@@ -193,22 +192,11 @@ Estamos juntos há:
 </div>
 </div>
 
-<div id="surpresa">
-💖 Feliz Nosso Dia 💖
-<p style="font-size:1.5rem;margin-top:20px;">Desde 18/06/2018 escrevendo nossa história.</p>
-</div>
-
 <audio id="musica" loop preload="auto">
 <source src="imaturo.mp3" type="audio/mp3">
 </audio>
 
 <script>
-
-/* SURPRESA AUTOMÁTICA */
-const hoje=new Date();
-if(hoje.getMonth()===5 && hoje.getDate()===18){
-document.getElementById("surpresa").style.display="flex";
-}
 
 /* LOGIN */
 function verificarSenha(){
@@ -244,7 +232,7 @@ document.getElementById("tempo").innerHTML=
 setInterval(atualizarTempo,1000);
 atualizarTempo();
 
-/* FRASES PERSONALIZADAS */
+/* FRASES */
 const frases=[
 "Desde 18 de junho de 2018 minha vida tem mais cor.",
 "Você é meu melhor capítulo.",
