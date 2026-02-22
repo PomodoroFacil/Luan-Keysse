@@ -60,7 +60,7 @@ display:none;
 flex-direction:column;
 align-items:center;
 text-align:center;
-z-index:2;
+z-index:5;
 }
 
 h1{
@@ -84,19 +84,25 @@ font-size:2rem;
 font-weight:bold;
 }
 
-/* CORAÇÕES */
-.heart{
+/* CORAÇÃO FOTO */
+.fotoHeart{
 position:absolute;
-bottom:-50px;
-color:white;
-font-size:24px;
-animation:float 8s linear infinite;
-opacity:0.8;
+bottom:-200px;
+width:140px;
+height:140px;
+animation:floatUp linear forwards;
 }
 
-@keyframes float{
-0%{transform:translateY(0) scale(1);}
-100%{transform:translateY(-110vh) scale(1.5);}
+@keyframes floatUp{
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:0;
+}
+10%{opacity:1;}
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
 }
 
 @keyframes pulse{
@@ -134,7 +140,7 @@ Estamos juntos há:
 
 <!-- MÚSICA -->
 <audio id="musica" loop preload="auto">
-<source src="matura.mp3" type="audio/mp3">
+<source src="imaturo.mp3" type="audio/mp3">
 </audio>
 
 <script>
@@ -152,7 +158,7 @@ const musica = document.getElementById("musica");
 musica.volume = 0.6;
 musica.play().catch(e => console.log("Autoplay bloqueado"));
 
-criarCoracoes();
+iniciarFotos();
 }else{
 document.getElementById("erro").innerText="Senha incorreta 😢";
 }
@@ -182,22 +188,58 @@ ${horas}h ${minutos}m ${segundos}s`;
 setInterval(atualizarTempo,1000);
 atualizarTempo();
 
-// ===== CORAÇÕES =====
-function criarCoracoes(){
+// ===== FOTOS =====
+const fotos = [
+"foto1.png",
+"foto2.png",
+"foto3.png",
+"foto4.png",
+"foto5.png",
+"foto6.png",
+"foto7.png",
+"foto8.png",
+"foto9.png",
+"foto10.png",
+"foto11.png",
+"foto12.png"
+];
+
+function iniciarFotos(){
+
 setInterval(()=>{
-const heart = document.createElement("div");
-heart.classList.add("heart");
-heart.innerHTML="❤️";
-heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=(20+Math.random()*30)+"px";
-heart.style.animationDuration=(5+Math.random()*5)+"s";
-document.body.appendChild(heart);
+
+const container = document.createElement("div");
+container.classList.add("fotoHeart");
+
+container.style.left = Math.random()*90 + "vw";
+container.style.animationDuration = (12 + Math.random()*8) + "s";
+
+container.innerHTML = `
+<div style="position:relative;width:100%;height:100%;">
+<svg viewBox="0 0 512 512" width="100%" height="100%">
+<path fill="white" d="M471.701 73.698c-54.5-46.4-136-38.3-186.4 13.7L256 116.9l-29.3-29.5c-50.4-52-131.9-60.1-186.4-13.7-62.8 53.5-66.1 149.8-9.9 207.2l193.5 199.8c12 12.4 31.4 12.4 43.4 0l193.5-199.8c56.2-57.4 52.9-153.7-9.9-207.2z"/>
+</svg>
+<img src="${fotos[Math.floor(Math.random()*fotos.length)]}"
+style="
+position:absolute;
+top:25%;
+left:25%;
+width:50%;
+height:50%;
+object-fit:cover;
+border-radius:50%;
+">
+</div>
+`;
+
+document.body.appendChild(container);
 
 setTimeout(()=>{
-heart.remove();
-},8000);
+container.remove();
+},20000);
 
-},400);
+},1800);
+
 }
 
 </script>
