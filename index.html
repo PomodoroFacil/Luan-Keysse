@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Luan & Keysse ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -25,7 +26,7 @@ position:relative;
 background:linear-gradient(135deg,#ff4e8a,#ff8fb1);
 }
 
-/* FUNDO AJUSTADO (MENOS ZOOM) */
+/* FUNDO DESKTOP */
 body::before{
 content:"";
 position:absolute;
@@ -40,38 +41,6 @@ filter:blur(1.5px);
 z-index:0;
 }
 
-/* LOGIN */
-#login{
-position:absolute;
-width:100%;
-height:100%;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#ff4e8a,#ff8fb1);
-z-index:20;
-}
-
-#login input{
-padding:12px;
-border:none;
-border-radius:8px;
-margin-top:10px;
-font-size:16px;
-}
-
-#login button{
-margin-top:10px;
-padding:10px 20px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-background:white;
-color:#ff4e8a;
-font-weight:bold;
-}
-
 /* SITE */
 #site{
 display:none;
@@ -80,13 +49,13 @@ align-items:center;
 text-align:center;
 z-index:5;
 position:relative;
+padding:20px;
 }
 
 h1{
 font-family:'Great Vibes', cursive;
 font-size:4rem;
 margin-bottom:20px;
-letter-spacing:2px;
 text-shadow:0 5px 20px rgba(0,0,0,0.3);
 }
 
@@ -108,13 +77,13 @@ font-weight:bold;
 /* FRASES */
 .frase{
 position:absolute;
-top:15%;
+top:12%;
 font-family:'Great Vibes', cursive;
 font-size:2rem;
 opacity:0;
 animation:fadeFrase 8s ease-in-out;
 text-align:center;
-max-width:80%;
+max-width:85%;
 text-shadow:0 3px 15px rgba(0,0,0,0.4);
 }
 
@@ -173,17 +142,47 @@ animation:twinkle 4s infinite;
 10%{opacity:1;}
 100%{transform:translateY(-120vh);opacity:0;}
 }
+
+/* ===== MOBILE AJUSTES ===== */
+@media (max-width: 768px){
+
+body::before{
+background-size:110%; /* mais zoom no mobile */
+filter:blur(1px);
+opacity:0.28;
+}
+
+h1{
+font-size:2.8rem;
+}
+
+.contador{
+padding:25px;
+font-size:1.2rem;
+}
+
+.tempo{
+font-size:1.5rem;
+}
+
+.frase{
+font-size:1.6rem;
+top:8%;
+}
+
+.foto{
+width:140px;
+}
+
+.heart{
+font-size:22px;
+}
+
+}
 </style>
 </head>
 
 <body>
-
-<div id="login">
-<h2>Digite nossa senha ❤️</h2>
-<input type="password" id="senha" placeholder="Senha">
-<button onclick="verificarSenha()">Entrar</button>
-<p id="erro"></p>
-</div>
 
 <div id="site">
 <h1>Luan & Keysse ❤️</h1>
@@ -199,22 +198,10 @@ Estamos juntos há:
 
 <script>
 
-/* LOGIN */
-function verificarSenha(){
-if(document.getElementById("senha").value==="18062018"){
-document.getElementById("login").style.display="none";
 document.getElementById("site").style.display="flex";
 const musica=document.getElementById("musica");
 musica.volume=0.35;
 musica.play();
-iniciarCoracoes();
-iniciarFotos();
-iniciarFrases();
-iniciarBrilho();
-}else{
-document.getElementById("erro").innerText="Senha incorreta 😢";
-}
-}
 
 /* CONTADOR */
 const dataInicio=new Date("2018-06-18T00:00:00");
@@ -251,45 +238,7 @@ document.body.appendChild(frase);
 setTimeout(()=>frase.remove(),8000);
 },10000);
 }
-
-/* CORAÇÕES */
-function iniciarCoracoes(){
-setInterval(()=>{
-const heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="❤️";
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(6+Math.random()*4)+"s";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),10000);
-},800);
-}
-
-/* FOTOS */
-const fotos=["foto1.png","foto2.png","foto3.png","foto4.png","foto5.png","foto6.png","foto7.png","foto8.png","foto9.png","foto10.png","foto11.png","foto12.png"];
-function iniciarFotos(){
-setInterval(()=>{
-const div=document.createElement("div");
-div.className="foto";
-div.style.left=Math.random()*80+"vw";
-div.style.animationDuration=(12+Math.random()*5)+"s";
-div.innerHTML=`<img src="${fotos[Math.floor(Math.random()*fotos.length)]}">`;
-document.body.appendChild(div);
-setTimeout(()=>div.remove(),20000);
-},3000);
-}
-
-/* BRILHO */
-function iniciarBrilho(){
-setInterval(()=>{
-const s=document.createElement("div");
-s.className="sparkle";
-s.style.left=Math.random()*100+"vw";
-s.style.top=Math.random()*100+"vh";
-document.body.appendChild(s);
-setTimeout(()=>s.remove(),4000);
-},300);
-}
+iniciarFrases();
 
 </script>
 
