@@ -6,58 +6,108 @@
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
 }
 
 body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
-    color:white;
-
-    /* FUNDO ROMÂNTICO */
-    background-image: url('https://images.unsplash.com/photo-1516589091380-5d8e87df6999');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+color:white;
 }
 
-.overlay{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.55);
-    z-index:0;
+/* LOGIN */
+#login{
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+z-index:10;
+}
+
+#login input{
+padding:12px;
+border:none;
+border-radius:8px;
+margin-top:10px;
+font-size:16px;
+}
+
+#login button{
+margin-top:10px;
+padding:10px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:white;
+color:#ff4e80;
+font-weight:bold;
+}
+
+/* SITE */
+#site{
+display:none;
+flex-direction:column;
+align-items:center;
+text-align:center;
+z-index:2;
 }
 
 h1{
-    font-size:3rem;
-    margin-bottom:30px;
-    z-index:1;
-    letter-spacing:2px;
+font-size:3rem;
+margin-bottom:20px;
+animation:fadeIn 2s ease-in-out;
 }
 
 .contador{
-    background:rgba(255,255,255,0.15);
-    padding:40px;
-    border-radius:25px;
-    backdrop-filter:blur(15px);
-    z-index:1;
-    font-size:1.5rem;
+font-size:1.8rem;
+background:rgba(255,255,255,0.2);
+padding:40px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+animation:pulse 3s infinite;
 }
 
 .tempo{
-    margin-top:15px;
-    font-size:2rem;
-    font-weight:bold;
+margin-top:15px;
+font-size:2rem;
+font-weight:bold;
+}
+
+/* CORAÇÕES */
+.heart{
+position:absolute;
+bottom:-50px;
+color:white;
+font-size:24px;
+animation:float 8s linear infinite;
+opacity:0.7;
+}
+
+@keyframes float{
+0%{transform:translateY(0) scale(1);}
+100%{transform:translateY(-110vh) scale(1.5);}
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.05);}
+100%{transform:scale(1);}
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
 }
 
 </style>
@@ -65,40 +115,86 @@ h1{
 
 <body>
 
-<div class="overlay"></div>
+<!-- LOGIN -->
+<div id="login">
+<h2>Digite nossa senha ❤️</h2>
+<input type="password" id="senha" placeholder="Senha">
+<button onclick="verificarSenha()">Entrar</button>
+<p id="erro" style="margin-top:10px;"></p>
+</div>
 
+<!-- SITE -->
+<div id="site">
 <h1>Luan & Keysse ❤️</h1>
-
 <div class="contador">
 Estamos juntos há:
 <div class="tempo" id="tempo"></div>
 </div>
+</div>
+
+<!-- MÚSICA -->
+<audio id="musica" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+</audio>
 
 <script>
 
-const dataInicio = new Date("2018-06-18T00:00:00");
+// ====== SENHA ======
+function verificarSenha(){
+const senhaCorreta = "18062018"; // ALTERA AQUI SE QUISER
+const senhaDigitada = document.getElementById("senha").value;
 
-function atualizarTempo() {
-
-    const agora = new Date();
-    const diferenca = agora - dataInicio;
-
-    const segundosTotais = Math.floor(diferenca / 1000);
-
-    const anos = Math.floor(segundosTotais / (365.25 * 24 * 60 * 60));
-    const meses = Math.floor((segundosTotais % (365.25 * 24 * 60 * 60)) / (30.44 * 24 * 60 * 60));
-    const dias = Math.floor((segundosTotais % (30.44 * 24 * 60 * 60)) / (24 * 60 * 60));
-    const horas = Math.floor((segundosTotais % (24 * 60 * 60)) / (60 * 60));
-    const minutos = Math.floor((segundosTotais % (60 * 60)) / 60);
-    const segundos = segundosTotais % 60;
-
-    document.getElementById("tempo").innerHTML =
-        `${anos} anos, ${meses} meses, ${dias} dias<br>
-         ${horas}h ${minutos}m ${segundos}s`;
+if(senhaDigitada === senhaCorreta){
+document.getElementById("login").style.display="none";
+document.getElementById("site").style.display="flex";
+document.getElementById("musica").play();
+criarCoracoes();
+}else{
+document.getElementById("erro").innerText="Senha incorreta 😢";
+}
 }
 
-setInterval(atualizarTempo, 1000);
+// ====== CONTADOR ======
+const dataInicio = new Date("2018-06-18T00:00:00");
+
+function atualizarTempo(){
+const agora = new Date();
+const diferenca = agora - dataInicio;
+
+const segundosTotais = Math.floor(diferenca / 1000);
+
+const anos = Math.floor(segundosTotais / (365.25*24*60*60));
+const meses = Math.floor((segundosTotais % (365.25*24*60*60)) / (30.44*24*60*60));
+const dias = Math.floor((segundosTotais % (30.44*24*60*60)) / (24*60*60));
+const horas = Math.floor((segundosTotais % (24*60*60)) / (60*60));
+const minutos = Math.floor((segundosTotais % (60*60)) / 60);
+const segundos = segundosTotais % 60;
+
+document.getElementById("tempo").innerHTML =
+`${anos} anos, ${meses} meses, ${dias} dias<br>
+${horas}h ${minutos}m ${segundos}s`;
+}
+
+setInterval(atualizarTempo,1000);
 atualizarTempo();
+
+// ====== CORAÇÕES ======
+function criarCoracoes(){
+setInterval(()=>{
+const heart = document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(20+Math.random()*30)+"px";
+heart.style.animationDuration=(5+Math.random()*5)+"s";
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},8000);
+
+},500);
+}
 
 </script>
 
